@@ -40,9 +40,25 @@ function NewReservation({edit=false}){
   async function validateData(formData){
     //setErrors([])
     let newErrors = []
+    let reservationDate
+    let reservationTime
+    if (formData.reservation_date)
+      reservationDate = formatReservationDate(formData).reservation_date
+    if (formData.reservation_time)
+      reservationTime = formatReservationTime(formData).reservation_time
 
-    const reservationDate = formatReservationDate(formData).reservation_date
-    const reservationTime = formatReservationTime(formData).reservation_time
+    if (!formData.first_name)
+      newErrors.push("Must enter a first name")
+    if (!formData.last_name)
+      newErrors.push("Must enter a last name")
+    if (!formData.mobile_number)
+      newErrors.push("Must enter a mobile number")
+    if (!formData.reservation_date)
+      newErrors.push("Must enter a date")
+    if (!formData.reservation_time)
+      newErrors.push("Must enter a time")
+    if (!formData.people)
+      newErrors.push("Must enter the number of people")
     if (reservationDate < today())
       newErrors.push("Date must be in the future")
     if (moment(reservationDate, "YYYY-MM-DD").day() === 2)

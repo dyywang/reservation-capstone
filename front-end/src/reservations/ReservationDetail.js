@@ -43,13 +43,13 @@ function ReservationDetail({reservation, setUpdated, updated}){
       <div className="row">
         { reservation.status === "booked" &&
         <div>
-          <button type="button" className="pt-1">
-            <Link className="btn-sm btn-primary" 
+          <button type="button" className="pt-1 btn-sm btn-primary">
+            <Link
               to={`reservations/${reservation.reservation_id}/seat`} 
               href={`reservations/${reservation.reservation_id}/seat`}>
           Seat</Link></button>
-          <button type="button" className="pt-1">
-            <Link className="btn-sm btn-primary"  
+          <button type="button" className="pt-1 btn-sm btn-primary">
+            <Link 
               to={`reservations/${reservation.reservation_id}/edit`} 
               href={`reservations/${reservation.reservation_id}/edit`}>
           Edit</Link></button>

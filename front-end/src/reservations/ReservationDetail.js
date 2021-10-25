@@ -1,9 +1,8 @@
 import React from "react";
-import {useHistory} from "react-router-dom"
+import {Link} from "react-router-dom"
 import {updateReservationStatus} from "../utils/api"
 
 function ReservationDetail({reservation, setUpdated, updated}){
-  const history = useHistory()
   const handleCancel = async () => {
     await updateReservationStatus(reservation.reservation_id,  'cancelled') 
     setUpdated(!updated)
@@ -43,14 +42,12 @@ function ReservationDetail({reservation, setUpdated, updated}){
       <div className="row ml-1 mt-1">
         { reservation.status === "booked" &&
         <div>
-          <button type="button" className="pt-1 btn-sm btn-primary"
-              href={`reservations/${reservation.reservation_id}/seat`}
-              onClick={()=>{history.push(`reservations/${reservation.reservation_id}/seat`)}}>
-          Seat</button>
-          <button type="button" className="pt-1 ml-1 btn-sm btn-primary"
-              href={`reservations/${reservation.reservation_id}/edit`}
-              onClick={()=>{history.push(`reservations/${reservation.reservation_id}/edit`)}}>
-          Edit</button>
+          <button type="button" className="pt-1 btn-sm"
+              href={`reservations/${reservation.reservation_id}/seat`}>
+          <Link to={`/reservations/${reservation.reservation_id}/seat`}>Seat</Link></button>
+          <button type="button" className="pt-1 ml-1 btn-sm"
+              href={`reservations/${reservation.reservation_id}/edit`}>
+          <Link to={`/reservations/${reservation.reservation_id}/edit`}>Edit</Link></button>
           <button type="button" className='pt-1 ml-1 btn-sm btn-secondary' data-reservation-id-cancel={reservation.reservation_id}
             onClick={ ()=> window.confirm("Do you want to cancel this reservation? This cannot be undone.") ? handleCancel() : null 
             }>
